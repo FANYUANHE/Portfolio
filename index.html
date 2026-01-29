@@ -28,7 +28,9 @@
     :root {
       --bg-primary: #FAFBFC;
       --text-primary: #1a1a2e;
+      --text-muted: #64748b;
       --accent: #0ea5e9;
+      --accent-muted: rgba(14, 165, 233, 0.85);
       --glass-bg: rgba(255, 255, 255, 0.75);
       --glass-border: rgba(0, 0, 0, 0.08);
     }
@@ -177,6 +179,12 @@
       transition: width 0.3s ease;
     }
     .link-underline:hover::after { width: 100%; }
+
+    .about-section-label { color: var(--text-muted); letter-spacing: 0.2em; }
+    .about-subtitle { color: var(--accent); font-weight: 600; padding-left: 0.75rem; border-left: 3px solid var(--accent); }
+    .about-body { color: var(--text-primary); }
+    .about-body-muted { color: var(--text-muted); }
+    .about-quote { color: var(--accent); font-weight: 600; }
 
     .hero-photo-wrap {
       position: relative;
@@ -568,13 +576,13 @@
       return (
         <section id="about" ref={sectionRef} className="py-24 md:py-32 px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-sm tracking-[0.3em] uppercase mb-12 text-[var(--text-primary)]">About Me</h2>
+            <h2 className="text-sm tracking-[0.3em] uppercase mb-12 about-section-label">About Me</h2>
 
             <div className="bento-grid">
               {/* 主介绍区：intro + highlights + companies + ACS + 结语 */}
               <div className="bento-item large glass">
-                <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-[var(--text-primary)]">Hello, I'm {profileData.name}</h3>
-                <p className="text-base md:text-lg leading-relaxed text-[var(--text-primary)] mb-6">
+                <h3 className="text-2xl md:text-3xl font-semibold mb-4 about-body">Hello, I'm {profileData.name}</h3>
+                <p className="text-base md:text-lg leading-relaxed about-body-muted mb-6">
                   {profileData.aboutIntro}
                 </p>
 
@@ -584,42 +592,42 @@
                       <span className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: "rgba(14,165,233,0.12)", color: profileData.colors.accent }}>
                         <i data-lucide={item.icon} className="w-4 h-4" />
                       </span>
-                      <p className="text-[var(--text-primary)] text-sm md:text-base leading-relaxed pt-0.5">{item.text}</p>
+                      <p className="about-body text-sm md:text-base leading-relaxed pt-0.5">{item.text}</p>
                     </div>
                   ))}
                 </div>
 
-                <h4 className="text-sm font-semibold uppercase tracking-wider mb-3" style={{ color: profileData.colors.accent }}>
+                <h4 className="about-subtitle text-sm uppercase tracking-wider mb-3">
                   Work experience at leading companies
                 </h4>
                 <ul className="space-y-2 mb-6">
                   {profileData.aboutCompanies.map((c, i) => (
                     <li key={i} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-                      <span className="font-semibold text-[var(--text-primary)] min-w-[8rem] shrink-0">
+                      <span className="font-semibold min-w-[8rem] shrink-0">
                         {c.url ? (
-                          <a href={c.url} target="_blank" rel="noopener noreferrer" className="link-underline hover:opacity-80 transition-opacity" style={{ color: profileData.colors.accent }}>{c.name}</a>
+                          <a href={c.url} target="_blank" rel="noopener noreferrer" className="link-underline hover:opacity-80 transition-opacity about-quote">{c.name}</a>
                         ) : (
-                          c.name
+                          <span className="about-quote">{c.name}</span>
                         )}
                       </span>
-                      <span className="text-sm text-[var(--text-primary)]">{c.desc}</span>
+                      <span className="text-sm about-body-muted">{c.desc}</span>
                     </li>
                   ))}
                 </ul>
 
-                <h4 className="text-sm font-semibold uppercase tracking-wider mb-2" style={{ color: profileData.colors.accent }}>
+                <h4 className="about-subtitle text-sm uppercase tracking-wider mb-2">
                   ACS Skills Assessment
                 </h4>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {profileData.acsAssessment.map((a, i) => (
-                    <span key={i} className="px-3 py-1.5 rounded-lg text-xs font-medium border" style={{ background: "rgba(14,165,233,0.08)", borderColor: "rgba(14,165,233,0.25)", color: profileData.colors.accent }}>
+                    <span key={i} className="px-3 py-1.5 rounded-lg text-xs font-medium border about-acs-tag" style={{ background: "rgba(14,165,233,0.1)", borderColor: "rgba(14,165,233,0.3)", color: profileData.colors.accent }}>
                       {a.code} – {a.title}
                     </span>
                   ))}
                 </div>
 
-                <p className="text-sm text-[var(--text-primary)] mb-4">{profileData.aboutRelocating}</p>
-                <p className="text-base font-medium text-[var(--text-primary)]" style={{ color: profileData.colors.accent }}>
+                <p className="text-sm about-body-muted mb-4">{profileData.aboutRelocating}</p>
+                <p className="text-base font-semibold about-quote">
                   {profileData.aboutClosing}
                 </p>
               </div>
@@ -628,28 +636,28 @@
                 <span className="text-5xl md:text-6xl font-black" style={{ color: profileData.colors.accent }}>
                   {profileData.experienceYears}
                 </span>
-                <span className="text-sm mt-2 text-[var(--text-primary)]">Experience</span>
+                <span className="text-sm mt-2 about-body-muted">Experience</span>
               </div>
 
               <div className="bento-item glass flex flex-col justify-center items-center text-center">
-                <i data-lucide="map-pin" className="w-8 h-8 mb-3 text-[var(--text-primary)]" />
-                <span className="text-lg font-medium text-[var(--text-primary)]">{profileData.location}</span>
-                <span className="text-sm mt-1 text-[var(--text-primary)]">Relocating to</span>
+                <i data-lucide="map-pin" className="w-8 h-8 mb-3 about-body-muted" style={{ color: 'var(--text-muted)' }} />
+                <span className="text-lg font-medium about-body">{profileData.location}</span>
+                <span className="text-sm mt-1 about-body-muted">Relocating to</span>
               </div>
 
               <div className="bento-item wide glass">
-                <h4 className="text-lg font-semibold mb-3 flex items-center gap-2 text-[var(--text-primary)]">
+                <h4 className="text-lg font-semibold mb-3 flex items-center gap-2 about-body">
                   <i data-lucide="graduation-cap" className="w-5 h-5" style={{ color: profileData.colors.accent }} />
                   Education
                 </h4>
-                <p className="text-base text-[var(--text-primary)]">{profileData.education.school}</p>
-                <p className="text-sm text-[var(--text-primary)]">{profileData.education.major} · {profileData.education.period}</p>
+                <p className="text-base about-body">{profileData.education.school}</p>
+                <p className="text-sm about-body-muted">{profileData.education.major} · {profileData.education.period}</p>
               </div>
 
               <div className="bento-item glass flex flex-col justify-center items-center text-center">
-                <i data-lucide="briefcase" className="w-8 h-8 mb-3 text-[var(--text-primary)]" />
-                <span className="text-3xl font-bold text-[var(--text-primary)]">{profileData.experienceList.length}</span>
-                <span className="text-sm mt-1 text-[var(--text-primary)]">Companies</span>
+                <i data-lucide="briefcase" className="w-8 h-8 mb-3 about-body-muted" style={{ color: 'var(--text-muted)' }} />
+                <span className="text-3xl font-bold about-body" style={{ color: profileData.colors.accent }}>{profileData.experienceList.length}</span>
+                <span className="text-sm mt-1 about-body-muted">Companies</span>
               </div>
             </div>
           </div>
