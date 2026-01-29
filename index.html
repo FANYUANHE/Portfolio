@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fan Yuanhe | Frontend Engineer</title>
+  <title>Euan Fan | Frontend Engineer</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -283,7 +283,7 @@
     // ============================================
     const profileData = {
       // Personal Info
-      name: "Fan Yuanhe",
+      name: "Euan Fan",
       nameChinese: "范园贺",
       title: "Senior Frontend Engineer",
       location: "Auckland, New Zealand",
@@ -473,7 +473,7 @@
         <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? "glass py-4" : "py-6"}`}>
           <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <a href="#" className="text-xl font-bold tracking-tight">
-              <span style={{ color: profileData.colors.accent }}>FY</span>H
+              <span style={{ color: profileData.colors.accent }}>EF</span>
             </a>
             <div className="hidden md:flex gap-8 text-sm font-medium">
               <a href="#about" className="link-underline hover:text-[#0ea5e9] transition-colors">About</a>
@@ -518,8 +518,7 @@
                 <span className="opacity-60">Frontend Engineer · </span><span className="opacity-100">{profileData.location}</span>
               </p>
               <h1 ref={nameRef} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[7.5rem] font-black tracking-tighter leading-none mb-4">
-                <span className="text-gradient">{firstName}</span>
-                <span style={{ color: profileData.colors.accent }} className="ml-1 md:ml-3">{lastName}</span>
+                <span style={{ color: profileData.colors.accent }} className="ml-1 md:ml-3">{firstName}</span>
               </h1>
               <p ref={titleRef} className="text-lg md:text-2xl lg:text-3xl font-light tracking-wide opacity-90">
                 {profileData.title}
