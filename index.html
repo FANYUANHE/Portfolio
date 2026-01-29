@@ -20,22 +20,49 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Apply saved theme before paint to avoid flash -->
+  <script>
+    (function() {
+      var stored = localStorage.getItem('portfolio-theme');
+      if (stored === 'dark' || stored === 'light') document.documentElement.setAttribute('data-theme', stored);
+    })();
+  </script>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    :root {
+    /* Light theme (default) */
+    :root,
+    [data-theme="light"] {
       --bg-primary: #FAFBFC;
-      --text-primary: #1a1a2e;
-      --text-muted: #64748b;
-      --accent: #0ea5e9;
+      --bg-secondary: #F1F5F9;
+      --text-primary: #0F172A;
+      --text-muted: #64748B;
+      --accent: #0EA5E9;
+      --accent-soft: #E0F2FE;
       --accent-muted: rgba(14, 165, 233, 0.85);
-      --glass-bg: rgba(255, 255, 255, 0.75);
+      --border: #E5E7EB;
+      --glass-bg: rgba(255, 255, 255, 0.85);
       --glass-border: rgba(0, 0, 0, 0.08);
     }
 
-    html { scroll-behavior: smooth; }
+    /* Dark theme */
+    [data-theme="dark"] {
+      --bg-primary: #0B1120;
+      --bg-secondary: #111827;
+      --text-primary: #E5E7EB;
+      --text-muted: #9CA3AF;
+      --accent: #38BDF8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --accent-muted: rgba(56, 189, 248, 0.9);
+      --border: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(17, 24, 39, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    html { scroll-behavior: smooth; transition: color 0.25s ease, background-color 0.25s ease; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -43,6 +70,7 @@
       color: var(--text-primary);
       overflow-x: hidden;
       cursor: none;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     .noise-overlay {
@@ -69,7 +97,7 @@
 
     .custom-cursor.hover {
       width: 50px; height: 50px;
-      background: rgba(14, 165, 233, 0.15);
+      background: var(--accent-soft);
     }
 
     .cursor-dot {
@@ -133,15 +161,16 @@
       75% { transform: translate(30px, 50px) scale(1.05); }
     }
 
+    .experience-card-hover:hover { border-color: var(--accent); }
     .timeline-item { transition: all 0.4s ease; }
     .timeline-item:hover { opacity: 1 !important; }
     .timeline-container:hover .timeline-item:not(:hover) { opacity: 0.3; }
 
     .magnetic-btn { position: relative; transition: transform 0.3s ease; }
-    .accent-glow { box-shadow: 0 0 30px rgba(14, 165, 233, 0.25); }
+    .accent-glow { box-shadow: 0 0 30px var(--accent-soft); }
 
     .text-gradient {
-      background: linear-gradient(135deg, #1a1a2e 0%, #475569 100%);
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-muted) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -161,7 +190,7 @@
 
     .bento-item:hover {
       transform: translateY(-5px);
-      border-color: rgba(14, 165, 233, 0.35);
+      border-color: var(--accent);
     }
 
     .bento-item.large { grid-column: span 2; grid-row: span 2; }
@@ -179,6 +208,7 @@
       transition: width 0.3s ease;
     }
     .link-underline:hover::after { width: 100%; }
+    .link-underline:hover { color: var(--accent); }
 
     .about-section-label { color: var(--text-muted); letter-spacing: 0.2em; }
     .about-subtitle { color: var(--accent); font-weight: 600; padding-left: 0.75rem; border-left: 3px solid var(--accent); }
@@ -190,7 +220,7 @@
       position: relative;
       border-radius: 1.25rem;
       overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 25px 50px -12px var(--accent-soft), 0 0 0 1px var(--border);
       aspect-ratio: 4 / 5;
       max-height:  min(85vh, 520px);
     }
@@ -218,7 +248,7 @@
     .hero-photo-placeholder {
       width: 100%;
       height: 100%;
-      background: linear-gradient(145deg, #e0f2fe 0%, #f0f9ff 50%, #bae6fd 100%);
+      background: linear-gradient(145deg, var(--accent-soft) 0%, var(--bg-secondary) 50%, var(--accent-soft) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -251,16 +281,57 @@
       opacity: 1;
     }
     .skills-group-card {
-      background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.95) 100%);
-      border: 1px solid rgba(0,0,0,0.06);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
       border-radius: 20px;
       padding: 1.75rem 1.5rem;
-      box-shadow: 0 4px 24px -4px rgba(14, 165, 233, 0.08);
-      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 4px 24px -4px var(--accent-soft);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, background 0.25s ease;
     }
     .skills-group-card:hover {
-      box-shadow: 0 12px 40px -8px rgba(14, 165, 233, 0.15);
-      border-color: rgba(14, 165, 233, 0.2);
+      box-shadow: 0 12px 40px -8px var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    /* Dark theme: liquid blobs */
+    [data-theme="dark"] .blob-1 {
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+    }
+    [data-theme="dark"] .blob-2 {
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+    }
+    [data-theme="dark"] .blob-3 {
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+    .theme-toggle:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .skills-section-title { color: var(--text-muted); }
+
+    .footer-border { border-color: var(--border); }
+
+    .experience-highlight-tag {
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
     }
 
     @media (max-width: 768px) {
@@ -408,8 +479,38 @@
     };
 
     // ============================================
+    // THEME
+    // ============================================
+    const THEME_KEY = 'portfolio-theme';
+    const getInitialTheme = () => {
+      if (typeof window === 'undefined') return 'light';
+      const stored = localStorage.getItem(THEME_KEY);
+      if (stored === 'light' || stored === 'dark') return stored;
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+      return 'light';
+    };
+
+    // ============================================
     // COMPONENTS
     // ============================================
+
+    const ThemeToggle = ({ theme, setTheme }) => {
+      const toggle = () => {
+        const next = theme === 'light' ? 'dark' : 'light';
+        setTheme(next);
+        localStorage.setItem(THEME_KEY, next);
+      };
+      return (
+        <button
+          type="button"
+          aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+          className="theme-toggle magnetic-btn"
+          onClick={toggle}
+        >
+          <i data-lucide={theme === 'light' ? 'moon' : 'sun'} className="w-5 h-5" />
+        </button>
+      );
+    };
 
     const CustomCursor = () => {
       const cursorRef = useRef(null);
@@ -460,7 +561,7 @@
       </div>
     );
 
-    const Navigation = () => {
+    const Navigation = ({ theme, setTheme }) => {
       const [scrolled, setScrolled] = useState(false);
 
       useEffect(() => {
@@ -473,13 +574,16 @@
         <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? "glass py-4" : "py-6"}`}>
           <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <a href="#" className="text-xl font-bold tracking-tight">
-              <span style={{ color: profileData.colors.accent }}>EF</span>
+              <span style={{ color: 'var(--accent)' }}>EF</span>
             </a>
-            <div className="hidden md:flex gap-8 text-sm font-medium">
-              <a href="#about" className="link-underline hover:text-[#0ea5e9] transition-colors">About</a>
-              <a href="#experience" className="link-underline hover:text-[#0ea5e9] transition-colors">Experience</a>
-              <a href="#skills" className="link-underline hover:text-[#0ea5e9] transition-colors">Skills</a>
-              <a href="#contact" className="link-underline hover:text-[#0ea5e9] transition-colors">Contact</a>
+            <div className="flex items-center gap-6">
+              <div className="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#about" className="link-underline transition-colors" style={{ color: 'var(--text-primary)' }}>About</a>
+                <a href="#experience" className="link-underline transition-colors" style={{ color: 'var(--text-primary)' }}>Experience</a>
+                <a href="#skills" className="link-underline transition-colors" style={{ color: 'var(--text-primary)' }}>Skills</a>
+                <a href="#contact" className="link-underline transition-colors" style={{ color: 'var(--text-primary)' }}>Contact</a>
+              </div>
+              <ThemeToggle theme={theme} setTheme={setTheme} />
             </div>
           </div>
         </nav>
@@ -518,7 +622,7 @@
                 <span className="opacity-60">Frontend Engineer · </span><span className="opacity-100">{profileData.location}</span>
               </p>
               <h1 ref={nameRef} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[7.5rem] font-black tracking-tighter leading-none mb-4">
-                <span style={{ color: profileData.colors.accent }} className="ml-1 md:ml-3">{firstName}</span>
+                <span style={{ color: 'var(--accent)' }} className="ml-1 md:ml-3">{firstName}</span>
               </h1>
               <p ref={titleRef} className="text-lg md:text-2xl lg:text-3xl font-light tracking-wide opacity-90">
                 {profileData.title}
@@ -588,7 +692,7 @@
                 <div className="space-y-4 mb-6">
                   {profileData.aboutHighlights.map((item, i) => (
                     <div key={i} className="flex gap-3 items-start">
-                      <span className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: "rgba(14,165,233,0.12)", color: profileData.colors.accent }}>
+                      <span className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>
                         <i data-lucide={item.icon} className="w-4 h-4" />
                       </span>
                       <p className="about-body text-sm md:text-base leading-relaxed pt-0.5">{item.text}</p>
@@ -619,7 +723,7 @@
                 </h4>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {profileData.acsAssessment.map((a, i) => (
-                    <span key={i} className="px-3 py-1.5 rounded-lg text-xs font-medium border about-acs-tag" style={{ background: "rgba(14,165,233,0.1)", borderColor: "rgba(14,165,233,0.3)", color: profileData.colors.accent }}>
+                    <span key={i} className="px-3 py-1.5 rounded-lg text-xs font-medium border about-acs-tag" style={{ background: 'var(--accent-soft)', borderColor: 'var(--accent)', color: 'var(--accent)' }}>
                       {a.code} – {a.title}
                     </span>
                   ))}
@@ -632,7 +736,7 @@
               </div>
 
               <div className="bento-item glass flex flex-col justify-center items-center text-center">
-                <span className="text-5xl md:text-6xl font-black" style={{ color: profileData.colors.accent }}>
+                <span className="text-5xl md:text-6xl font-black" style={{ color: 'var(--accent)' }}>
                   {profileData.experienceYears}
                 </span>
                 <span className="text-sm mt-2 about-body-muted">Experience</span>
@@ -646,7 +750,7 @@
 
               <div className="bento-item wide glass">
                 <h4 className="text-lg font-semibold mb-3 flex items-center gap-2 about-body">
-                  <i data-lucide="graduation-cap" className="w-5 h-5" style={{ color: profileData.colors.accent }} />
+                  <i data-lucide="graduation-cap" className="w-5 h-5" style={{ color: 'var(--accent)' }} />
                   Education
                 </h4>
                 <p className="text-base about-body">{profileData.education.school}</p>
@@ -655,7 +759,7 @@
 
               <div className="bento-item glass flex flex-col justify-center items-center text-center">
                 <i data-lucide="briefcase" className="w-8 h-8 mb-3 about-body-muted" style={{ color: 'var(--text-muted)' }} />
-                <span className="text-3xl font-bold about-body" style={{ color: profileData.colors.accent }}>{profileData.experienceList.length}</span>
+                <span className="text-3xl font-bold about-body" style={{ color: 'var(--accent)' }}>{profileData.experienceList.length}</span>
                 <span className="text-sm mt-1 about-body-muted">Companies</span>
               </div>
             </div>
@@ -705,21 +809,21 @@
             <h2 className="text-sm tracking-[0.3em] uppercase opacity-60 mb-16">Experience</h2>
 
             <div className="timeline-container relative">
-              <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-[#0ea5e9] via-black/10 to-transparent" />
+              <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px experience-line" style={{ background: 'linear-gradient(to bottom, var(--accent), var(--border), transparent)' }} />
 
               {profileData.experienceList.map((exp, index) => (
                 <div key={index} className="timeline-item relative pl-8 md:pl-20 pb-16 last:pb-0">
                   <div
                     className="absolute left-0 md:left-8 top-2 w-4 h-4 rounded-full -translate-x-1/2 border-2 transition-all duration-300"
-                    style={{ borderColor: profileData.colors.accent, background: profileData.colors.background }}
+                    style={{ borderColor: 'var(--accent)', background: 'var(--bg-primary)' }}
                   />
 
-                  <div className="glass rounded-2xl p-6 md:p-8 transition-all duration-400 hover:border-[#0ea5e9]/30">
+                  <div className="glass rounded-2xl p-6 md:p-8 transition-all duration-400 experience-card-hover">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                       <h3 className="text-xl md:text-2xl font-bold">{exp.company}</h3>
                       <span className="text-sm opacity-60 mt-1 md:mt-0">{exp.period}</span>
                     </div>
-                    <p className="text-base font-medium mb-4" style={{ color: profileData.colors.accent }}>
+                    <p className="text-base font-medium mb-4" style={{ color: 'var(--accent)' }}>
                       {exp.position}
                     </p>
                     <p className="text-sm md:text-base opacity-70 leading-relaxed mb-4">
@@ -727,7 +831,7 @@
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {exp.highlights.map((highlight, i) => (
-                        <span key={i} className="px-3 py-1 rounded-full text-xs bg-black/5 border border-black/10">
+                        <span key={i} className="px-3 py-1 rounded-full text-xs experience-highlight-tag">
                           {highlight}
                         </span>
                       ))}
@@ -742,7 +846,7 @@
       );
     };
 
-    const Skills = () => {
+    const Skills = ({ theme }) => {
       const sectionRef = useRef(null);
 
       useEffect(() => {
@@ -781,10 +885,10 @@
       return (
         <section id="skills" ref={sectionRef} className="py-24 md:py-32 px-6 relative overflow-hidden">
           <div className="absolute inset-0 pointer-events-none opacity-30" style={{
-            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(14, 165, 233, 0.12) 0%, transparent 60%)'
+            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-soft) 0%, transparent 60%)'
           }} />
           <div className="max-w-6xl mx-auto relative">
-            <h2 className="skills-title text-sm tracking-[0.3em] uppercase opacity-60 mb-14">
+            <h2 className="skills-title text-sm tracking-[0.3em] uppercase mb-14 skills-section-title">
               Technical Skills
             </h2>
 
@@ -792,13 +896,14 @@
               {profileData.skillsGroups.map((group, gIndex) => (
                 <div key={gIndex} className="skills-group skills-group-card">
                   <h3 className="text-base font-semibold tracking-wide mb-6 flex items-center gap-2">
-                    <span className="w-1.5 h-6 rounded-full" style={{ background: profileData.colors.accent }} />
-                    <span style={{ color: profileData.colors.accent }}>{group.title}</span>
+                    <span className="w-1.5 h-6 rounded-full" style={{ background: 'var(--accent)' }} />
+                    <span style={{ color: 'var(--accent)' }}>{group.title}</span>
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {group.items.map((item, i) => {
                       const color = getSkillColor(item);
                       const lightBg = ['#F7DF1E', '#61DAFB', '#FFCC00', '#8DD6F9', '#4FC08D'].includes(color);
+                      const pillTextColor = theme === 'dark' ? 'var(--text-primary)' : (lightBg ? '#1a1a2e' : 'var(--text-primary)');
                       return (
                         <span
                           key={i}
@@ -806,7 +911,7 @@
                           style={{
                             '--skill-color': color,
                             background: `linear-gradient(90deg, ${color}18 0%, ${color}08 100%)`,
-                            color: lightBg ? '#1a1a2e' : 'var(--text-primary)',
+                            color: pillTextColor,
                             borderColor: `${color}25`
                           }}
                           onMouseEnter={(e) => {
@@ -861,38 +966,38 @@
             <p className="text-sm tracking-[0.3em] uppercase opacity-60 mb-8">Let's Connect</p>
 
             <h2 className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-12">
-              Get In <span style={{ color: profileData.colors.accent }}>Touch</span>
+              Get In <span style={{ color: 'var(--accent)' }}>Touch</span>
             </h2>
 
             <a
               href={`mailto:${profileData.email}`}
-              className="magnetic-btn inline-block text-xl md:text-3xl font-medium mb-16 link-underline hover:text-[#0ea5e9] transition-colors"
+              className="magnetic-btn inline-block text-xl md:text-3xl font-medium mb-16 link-underline transition-colors"
             >
               {profileData.email}
             </a>
 
             <div className="flex justify-center gap-8 mb-16">
               <a href={profileData.social.github} target="_blank" rel="noopener noreferrer"
-                 className="magnetic-btn w-14 h-14 rounded-full glass flex items-center justify-center hover:border-[#0ea5e9]/50 transition-all">
+                 className="magnetic-btn w-14 h-14 rounded-full glass flex items-center justify-center hover:border-[var(--accent)] transition-all">
                 <i data-lucide="github" className="w-6 h-6" />
               </a>
               <a href={profileData.social.linkedin} target="_blank" rel="noopener noreferrer"
-                 className="magnetic-btn w-14 h-14 rounded-full glass flex items-center justify-center hover:border-[#0ea5e9]/50 transition-all">
+                 className="magnetic-btn w-14 h-14 rounded-full glass flex items-center justify-center hover:border-[var(--accent)] transition-all">
                 <i data-lucide="linkedin" className="w-6 h-6" />
               </a>
               <a href={profileData.social.twitter} target="_blank" rel="noopener noreferrer"
-                 className="magnetic-btn w-14 h-14 rounded-full glass flex items-center justify-center hover:border-[#0ea5e9]/50 transition-all">
+                 className="magnetic-btn w-14 h-14 rounded-full glass flex items-center justify-center hover:border-[var(--accent)] transition-all">
                 <i data-lucide="twitter" className="w-6 h-6" />
               </a>
               <a href={`mailto:${profileData.email}`}
-                 className="magnetic-btn w-14 h-14 rounded-full glass flex items-center justify-center hover:border-[#0ea5e9]/50 transition-all">
+                 className="magnetic-btn w-14 h-14 rounded-full glass flex items-center justify-center hover:border-[var(--accent)] transition-all">
                 <i data-lucide="mail" className="w-6 h-6" />
               </a>
             </div>
 
-            <div className="pt-8 border-t border-black/10">
-              <p className="text-sm opacity-60">© {new Date().getFullYear()} {profileData.name}. All rights reserved.</p>
-              <p className="text-xs opacity-50 mt-2">Crafted with React + GSAP + Tailwind CSS</p>
+            <div className="pt-8 border-t footer-border">
+              <p className="text-sm opacity-60" style={{ color: 'var(--text-muted)' }}>© {new Date().getFullYear()} {profileData.name}. All rights reserved.</p>
+              <p className="text-xs opacity-50 mt-2" style={{ color: 'var(--text-muted)' }}>Crafted with React + GSAP + Tailwind CSS</p>
             </div>
           </div>
         </footer>
@@ -900,6 +1005,12 @@
     };
 
     const App = () => {
+      const [theme, setTheme] = useState(getInitialTheme);
+
+      useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+      }, [theme]);
+
       useEffect(() => {
         lucide.createIcons();
         gsap.registerPlugin(ScrollTrigger);
@@ -907,17 +1018,21 @@
         return () => ScrollTrigger.getAll().forEach((t) => t.kill());
       }, []);
 
+      useEffect(() => {
+        lucide.createIcons();
+      }, [theme]);
+
       return (
         <>
           <CustomCursor />
           <LiquidBackground />
           <div className="noise-overlay" />
-          <Navigation />
+          <Navigation theme={theme} setTheme={setTheme} />
           <main>
             <Hero />
             <About />
             <Experience />
-            <Skills />
+            <Skills theme={theme} />
             <Footer />
           </main>
         </>
