@@ -1,4 +1,4 @@
-# Fan Yuanhe | Personal Portfolio
+# Euan Fan | Personal Portfolio
 
 A single-page portfolio and resume website built with React, GSAP, and Tailwind CSS. It features a light theme, responsive layout, scroll-triggered animations, and a data-driven structure so you can update all content from one configuration object.
 
@@ -101,7 +101,7 @@ All content comes from **`profileData`** in `index.html` (inside the `<script ty
 
 | Field              | Description |
 |--------------------|-------------|
-| `name`             | Full name (e.g. `"Fan Yuanhe"`); split for Hero first/last name. |
+| `name`             | Full name (e.g. `"Euan Fan"`); split for Hero first/last name. |
 | `nameChinese`      | Chinese name (e.g. `"范园贺"`); for reference or future use. |
 | `title`            | Job title shown in Hero and elsewhere. |
 | `location`         | Current location (e.g. `"Auckland, New Zealand"`). |
