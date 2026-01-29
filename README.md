@@ -19,6 +19,11 @@ A single-page portfolio and resume website built with React, GSAP, and Tailwind 
 
 ---
 
+## Portfolio Website
+[**Euan**](https://euanfan.github.io/Portfolio/)  
+
+---
+
 ## Overview
 
 The site is a single HTML file (`index.html`) that loads React, Babel, GSAP, Tailwind, and Lucide from CDNs. There is no build step or Node.js required. All content is driven by a `profileData` object at the top of the script; changing that object updates the entire page. The layout is responsive (desktop and mobile), and animations use GSAP (Hero timeline, ScrollTrigger) and Intersection Observer (Experience section, for reliable behavior on touch scroll).
