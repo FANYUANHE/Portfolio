@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
   <title>Euan Fan | Frontend Engineer</title>
 
   <!-- Tailwind CSS -->
@@ -181,8 +181,19 @@
     .project-web-preview img { display: block; width: 100%; height: 100%; object-fit: cover; }
     .project-web-fullbleed { width: 100%; aspect-ratio: 16 / 8; overflow: hidden; background: var(--bg-secondary); }
     .project-web-fullbleed img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .project-carousel-track { display: flex; transition: transform 0.35s ease-out; will-change: transform; }
-    .project-carousel-track > * { flex: 0 0 100%; min-width: 0; }
+    .project-carousel-track { display: flex; transition: transform 0.35s ease-out; will-change: transform; flex-wrap: nowrap; }
+    .project-carousel-track .project-carousel-slide { flex: 0 0 auto; min-width: 0; display: flex; align-items: center; justify-content: center; background: var(--bg-secondary); }
+    .project-carousel-track .project-carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left top;
+      display: block;
+      image-rendering: auto;
+      image-rendering: -webkit-optimize-contrast;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+    }
     .project-carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background 0.2s, transform 0.2s; }
     .project-carousel-dot.active { background: var(--accent); transform: scale(1.2); }
     .project-carousel-dot:hover { background: var(--accent-muted); }
@@ -270,6 +281,16 @@
     .about-body { color: var(--text-primary); }
     .about-body-muted { color: var(--text-muted); }
     .about-quote { color: var(--accent); font-weight: 600; }
+
+    .about-company-link {
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .about-company-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+    }
 
     .hero-photo-wrap {
       position: relative;
@@ -466,12 +487,6 @@
         { icon: "brain", text: "Strong background in front-end architecture, full-stack development (Node.js), and UI/UX collaboration" },
         { icon: "building-2", text: "Work experience at leading technology companies in China" }
       ],
-      aboutCompanies: [
-        { name: "Baidu", url: "https://ir.baidu.com/", desc: "Leading AI and internet services company, well known for search, cloud, and deep learning technologies." },
-        { name: "Alibaba Group", url: "https://www.alibabagroup.com/en-US/", desc: "Global leader in e-commerce, cloud computing, and digital infrastructure." },
-        { name: "Meituan", url: "https://www.meituan.com/en-US/about-us", desc: "Major platform for food delivery, local services, and on-demand consumer technology." },
-        { name: "KE Holdings (Beike)", url: "https://investors.ke.com", desc: "Technology-driven real estate platform integrating online and offline brokerage services." }
-      ],
       acsAssessment: [
         { code: "261212", title: "Web Developer" },
         { code: "261312", title: "Developer Programmer" },
@@ -480,26 +495,12 @@
       aboutRelocating: "Currently moving to New Zealand for postgraduate study and job-seeking.",
       aboutClosing: "I love clean code, smart UI interactions, and turning designs into delightful user experiences.",
 
-      // Work Experience
+      // Work Experience (companyBrief optional: one-line company intro, shown under company name)
       experienceList: [
         {
-          company: "Meituan",
-          position: "Senior Frontend Engineer",
-          period: "Jul 2021 - Present",
-          description:
-            "Core developer for Meituan Youxuan leader mini program. Led component library development, UI standardization, and security enhancements including ID obfuscation to prevent horizontal privilege escalation.",
-          highlights: ["Component Library", "Security", "Performance"]
-        },
-        {
-          company: "Baidu",
-          position: "Frontend Tech Lead",
-          period: "Jul 2020 - Jul 2021",
-          description:
-            "Led the intelligent customer service project serving Fengchao/feed advertising platforms. Developed H5 customer service, onboarded 10+ platforms, and increased daily issue resolution from 200-300 to 1000.",
-          highlights: ["Team Lead", "H5 Development", "Platform Integration"]
-        },
-        {
           company: "Beike (KE Holdings)",
+          companyBrief: "Technology-driven real estate platform integrating online and offline brokerage services.",
+          companyUrl: "https://investors.ke.com",
           position: "Frontend Tech Lead",
           period: "Feb 2018 - Mar 2020",
           description:
@@ -507,17 +508,61 @@
           highlights: ["Low-code Platform", "Visualization", "Efficiency"]
         },
         {
-          company: "Chunyuyisheng",
+          company: "Alibaba Group",
+          companyBrief: "Global leader in e-commerce, cloud computing, and digital infrastructure.",
+          companyUrl: "https://www.alibabagroup.com/en-US/",
           position: "Frontend Engineer",
           period: "Aug 2016 - Feb 2018",
           description:
             "Developed and maintained mobile and web applications for the healthcare platform, focusing on user experience and performance optimization.",
           highlights: ["Mobile Dev", "Healthcare", "UX"]
-        }
+        },
+        {
+          company: "Baidu",
+          companyBrief: "Leading AI and internet services company, well known for search, cloud, and deep learning technologies.",
+          companyUrl: "https://ir.baidu.com/",
+          position: "Frontend Tech Lead",
+          period: "Jul 2020 - Jul 2021",
+          description:
+            "Led the intelligent customer service project serving Fengchao/feed advertising platforms. Developed H5 customer service, onboarded 10+ platforms, and increased daily issue resolution from 200-300 to 1000.",
+          highlights: ["Team Lead", "H5 Development", "Platform Integration"]
+        },
+        {
+          company: "Meituan",
+          companyBrief: "Major platform for food delivery, local services, and on-demand consumer technology.",
+          companyUrl: "https://www.meituan.com/en-US/about-us",
+          position: "Senior Frontend Engineer",
+          period: "Jul 2021 - Present",
+          description:
+            "Core developer for Meituan Youxuan leader mini program. Led component library development, UI standardization, and security enhancements including ID obfuscation to prevent horizontal privilege escalation.",
+          highlights: ["Component Library", "Security", "Performance"]
+        },
       ],
 
       // Project Showcase (type: 'mobile' | 'web'). Use screenshots[] for carousel; single screenshot still supported.
       projectList: [
+        {
+          title: "Low-code Marketing Campaign Builder",
+          type: "mobile",
+          screenshots: [
+            "images/low_code_1.png",
+            "images/low_code_2.png",
+            "images/low_code_3.png",
+            "images/low_code_4.png"
+          ],
+          background: "Operations needed to ship campaign pages (promos, seasonal themes) frequently. Each launch took 4–5 days and depended on frontend capacity and releases, which became a bottleneck.",
+          role: "Frontend tech lead: owned the builder’s frontend architecture, visual editor, component library, and publish/rollback capabilities.",
+          problemsSolved: [
+            "Long campaign launch cycles, unable to respond quickly to ops needs",
+            "Tight coupling between dev and ops, frequent release conflicts",
+            "Historical campaign pages were hard to reuse and manage in one place"
+          ],
+          results: [
+            "Reduced launch time from 4–5 days to under 30 minutes; ops can build and publish themselves",
+            "Decoupled dev and ops, fewer release conflicts; frontend focused on components and platform",
+            "Reusable campaign component library and templates; reuse rate for new campaigns over 60%"
+          ]
+        },
         {
           title: "Smart Customer Service H5",
           type: "web",
@@ -537,27 +582,6 @@
             "Onboarded 10+ business platforms; daily issue resolution increased from 200–300 to 1000+",
             "Offline and retry strategies for first screen and critical APIs significantly improved success rate on weak networks",
             "Unified Q&A-to-ticket flow and UI, with a clear improvement in user satisfaction"
-          ]
-        },
-        {
-          title: "Low-code Marketing Campaign Builder",
-          type: "mobile",
-          screenshots: [
-            "https://picsum.photos/400/700?random=2",
-            "https://picsum.photos/400/700?random=2b",
-            "https://picsum.photos/400/700?random=2c"
-          ],
-          background: "Operations needed to ship campaign pages (promos, seasonal themes) frequently. Each launch took 4–5 days and depended on frontend capacity and releases, which became a bottleneck.",
-          role: "Frontend tech lead: owned the builder’s frontend architecture, visual editor, component library, and publish/rollback capabilities.",
-          problemsSolved: [
-            "Long campaign launch cycles, unable to respond quickly to ops needs",
-            "Tight coupling between dev and ops, frequent release conflicts",
-            "Historical campaign pages were hard to reuse and manage in one place"
-          ],
-          results: [
-            "Reduced launch time from 4–5 days to under 30 minutes; ops can build and publish themselves",
-            "Decoupled dev and ops, fewer release conflicts; frontend focused on components and platform",
-            "Reusable campaign component library and templates; reuse rate for new campaigns over 60%"
           ]
         },
         {
@@ -855,23 +879,23 @@
                   ))}
                 </div>
 
-                <h4 className="about-subtitle text-sm uppercase tracking-wider mb-3">
+                <h4 className="about-subtitle text-sm uppercase tracking-wider mb-2">
                   Work experience at leading companies
                 </h4>
-                <ul className="space-y-2 mb-6">
-                  {profileData.aboutCompanies.map((c, i) => (
-                    <li key={i} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-                      <span className="font-semibold min-w-[8rem] shrink-0">
-                        {c.url ? (
-                          <a href={c.url} target="_blank" rel="noopener noreferrer" className="link-underline hover:opacity-80 transition-opacity about-quote">{c.name}</a>
-                        ) : (
-                          <span className="about-quote">{c.name}</span>
-                        )}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {profileData.experienceList.map((exp, i) => (
+                    exp.companyUrl ? (
+                      <a key={i} href={exp.companyUrl} target="_blank" rel="noopener noreferrer" className="about-company-link inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all" style={{ background: 'var(--accent-soft)', borderColor: 'var(--accent)', color: 'var(--accent)' }}>
+                        <span>{exp.company}</span>
+                        <i data-lucide="external-link" className="w-3 h-3 opacity-80 flex-shrink-0" />
+                      </a>
+                    ) : (
+                      <span key={i} className="px-3 py-1.5 rounded-lg text-xs font-medium border about-acs-tag" style={{ background: 'var(--accent-soft)', borderColor: 'var(--accent)', color: 'var(--accent)' }}>
+                        {exp.company}
                       </span>
-                      <span className="text-sm about-body-muted">{c.desc}</span>
-                    </li>
+                    )
                   ))}
-                </ul>
+                </div>
 
                 <h4 className="about-subtitle text-sm uppercase tracking-wider mb-2">
                   ACS Skills Assessment
@@ -974,10 +998,19 @@
                   />
 
                   <div className="glass rounded-2xl p-6 md:p-8 transition-all duration-400 experience-card-hover">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                      <h3 className="text-xl md:text-2xl font-bold">{exp.company}</h3>
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                      <h3 className="text-xl md:text-2xl font-bold">
+                        {exp.companyUrl ? (
+                          <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer" className="link-underline hover:opacity-90">{exp.company}</a>
+                        ) : (
+                          exp.company
+                        )}
+                      </h3>
                       <span className="text-sm opacity-60 mt-1 md:mt-0">{exp.period}</span>
                     </div>
+                    {exp.companyBrief && (
+                      <p className="text-sm opacity-60 mb-3 leading-relaxed">{exp.companyBrief}</p>
+                    )}
                     <p className="text-base font-medium mb-4" style={{ color: 'var(--accent)' }}>
                       {exp.position}
                     </p>
@@ -1088,11 +1121,15 @@
                     <div className={"overflow-hidden rounded-2xl " + (isMobile ? "project-phone-frame mx-auto md:mx-0" : "project-web-fullbleed w-full")}>
                       <div
                         className="project-carousel-track h-full"
-                        style={{ width: `${images.length * 100}%`, transform: `translateX(-${currentSlide * slidePct}%)` }}
+                        style={{
+                          width: `${images.length * 100}%`,
+                          minWidth: `${images.length * 100}%`,
+                          transform: `translateX(-${currentSlide * (100 / images.length)}%)`
+                        }}
                       >
                         {images.map((src, i) => (
-                          <div key={i} className="h-full flex-shrink-0" style={{ width: `${slidePct}%` }}>
-                            <img src={src} alt={`${project.title} screenshot ${i + 1}`} className="w-full h-full object-cover block" />
+                          <div key={i} className="project-carousel-slide h-full" style={{ width: `${100 / images.length}%`, flex: `0 0 ${100 / images.length}%` }}>
+                            <img src={src} alt={`${project.title} screenshot ${i + 1}`} className="w-full h-full block" />
                           </div>
                         ))}
                       </div>
