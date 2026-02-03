@@ -1047,7 +1047,7 @@
                   />
 
                   <div className="glass rounded-2xl p-5 md:p-8 transition-all duration-400 experience-card-hover">
-                    <div className="flex items-start gap-3 md:gap-4 mb-2">
+                    <div className="flex flex-wrap items-start gap-3 md:gap-4 mb-2">
                       <div className="experience-company-logo-wrap">
                         {exp.companyLogo ? (
                           <img
@@ -1076,9 +1076,12 @@
                           <span className="text-sm opacity-60">{exp.period}</span>
                         </div>
                         {exp.companyBrief && (
-                          <p className="text-xs md:text-sm opacity-60 mt-1 leading-relaxed">{exp.companyBrief}</p>
+                          <p className="hidden md:block text-sm opacity-60 mt-1 leading-relaxed">{exp.companyBrief}</p>
                         )}
                       </div>
+                      {exp.companyBrief && (
+                        <p className="w-full md:hidden text-xs md:text-sm opacity-60 mt-2 leading-relaxed order-3">{exp.companyBrief}</p>
+                      )}
                     </div>
                     <p className="text-base font-medium mb-4" style={{ color: 'var(--accent)' }}>
                       {exp.position}
