@@ -456,12 +456,15 @@
     .footer-title .footer-title-accent { color: var(--accent); }
     .footer-tagline {
       color: var(--text-muted);
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       font-weight: 400;
       line-height: 1.5;
       max-width: 28rem;
       margin-left: auto;
       margin-right: auto;
+    }
+    @media (min-width: 768px) {
+      .footer-tagline { font-size: 0.9375rem; }
     }
     .footer-connect-label {
       color: var(--text-muted);
@@ -470,17 +473,42 @@
       font-weight: 500;
     }
     .footer-copy { color: var(--text-muted); opacity: 0.8; }
+    .footer-visa {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      line-height: 1.4;
+      text-align: center;
+      max-width: 22rem;
+      margin-left: auto;
+      margin-right: auto;
+      flex-wrap: wrap;
+    }
+    @media (min-width: 768px) {
+      .footer-visa { font-size: 0.875rem; gap: 0.5rem; max-width: 26rem; }
+    }
+    .footer-visa i { color: var(--accent); flex-shrink: 0; }
     .footer-cta {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
-      padding: 0.875rem 1.75rem;
+      padding: 0.75rem 1.25rem;
       border-radius: 9999px;
       border: 1px solid var(--border);
       background: var(--glass-bg);
       color: var(--text-primary);
       font-weight: 500;
+      font-size: 0.875rem;
       transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+      word-break: break-all;
+    }
+    @media (min-width: 768px) {
+      .footer-cta { padding: 0.875rem 1.75rem; font-size: 1.125rem; word-break: normal; }
     }
     .footer-cta:hover {
       border-color: var(--accent);
@@ -489,8 +517,8 @@
       box-shadow: 0 4px 20px -4px rgba(14, 165, 233, 0.25);
     }
     .footer-social-link {
-      width: 3rem;
-      height: 3rem;
+      width: 2.75rem;
+      height: 2.75rem;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -499,6 +527,9 @@
       background: var(--glass-bg);
       color: var(--text-primary);
       transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    @media (min-width: 768px) {
+      .footer-social-link { width: 3rem; height: 3rem; }
     }
     .footer-social-link:hover {
       border-color: var(--accent);
@@ -720,8 +751,7 @@
       // Social Links
       social: {
         github: "https://github.com/EUANFAN",
-        linkedin: "https://linkedin.com",
-        twitter: "https://twitter.com"
+        linkedin: "https://www.linkedin.com/in/fan-yuanhe-5b17a23a1/",
       },
 
       // Colors
@@ -1420,27 +1450,32 @@
       }, []);
 
       return (
-        <footer id="contact" ref={sectionRef} className="min-h-[70vh] flex flex-col justify-center py-24 md:py-32 px-6 relative">
-          <div className="footer-content max-w-6xl mx-auto text-center">
-            <p className="footer-label uppercase mb-6">Let's Connect</p>
+        <footer id="contact" ref={sectionRef} className="min-h-[70vh] flex flex-col justify-center py-16 sm:py-20 md:py-28 lg:py-32 px-4 sm:px-6 relative">
+          <div className="footer-content max-w-6xl mx-auto text-center w-full">
+            <p className="footer-label uppercase mb-4 md:mb-6">Let's Connect</p>
 
-            <h2 className="footer-title text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-4">
+            <h2 className="footer-title text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl tracking-tighter mb-3 md:mb-4">
               Get In <span className="footer-title-accent">Touch</span>
             </h2>
-            <p className="footer-tagline mb-10 md:mb-12">
-              Open to opportunities. Feel free to reach out.
-            </p>
+            {profileData.heroVisa && (
+              <p className="footer-visa mb-8 md:mb-10">
+                <i data-lucide="check-circle" className="w-4 h-4 flex-shrink-0" />
+                <span>{profileData.heroVisa}</span>
+              </p>
+            )}
 
-            <a
-              href={`mailto:${profileData.email}`}
-              className="footer-cta mb-12 md:mb-14 inline-flex items-center gap-2 text-base md:text-lg"
-            >
-              <i data-lucide="mail" className="w-5 h-5 flex-shrink-0" />
-              <span>{profileData.email}</span>
-            </a>
+            <div className="w-full flex justify-center mb-10 md:mb-14">
+              <a
+                href={`mailto:${profileData.email}`}
+                className="footer-cta inline-flex items-center gap-2"
+              >
+                <i data-lucide="mail" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                <span>{profileData.email}</span>
+              </a>
+            </div>
 
-            <p className="footer-connect-label uppercase mb-6">Connect</p>
-            <div className="flex justify-center gap-4 md:gap-6 mb-16">
+            <p className="footer-connect-label uppercase mb-4 md:mb-6">Connect</p>
+            <div className="flex justify-center gap-3 sm:gap-4 md:gap-6 mb-12 md:mb-16">
               <a href={profileData.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
                  className="footer-social-link">
                 <i data-lucide="github" className="w-5 h-5" />
@@ -1449,18 +1484,14 @@
                  className="footer-social-link">
                 <i data-lucide="linkedin" className="w-5 h-5" />
               </a>
-              <a href={profileData.social.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter"
-                 className="footer-social-link">
-                <i data-lucide="twitter" className="w-5 h-5" />
-              </a>
               <a href={`mailto:${profileData.email}`} aria-label="Email"
                  className="footer-social-link">
                 <i data-lucide="mail" className="w-5 h-5" />
               </a>
             </div>
 
-            <div className="pt-8 border-t footer-border">
-              <p className="footer-copy text-sm">© {new Date().getFullYear()} {profileData.name}. All rights reserved.</p>
+            <div className="pt-6 md:pt-8 border-t footer-border">
+              <p className="footer-copy text-xs md:text-sm">© {new Date().getFullYear()} {profileData.name}. All rights reserved.</p>
               <p className="footer-copy text-xs mt-2">Built with React, GSAP & Tailwind CSS</p>
             </div>
           </div>
