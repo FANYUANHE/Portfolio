@@ -414,7 +414,7 @@
       align-items: center;
       gap: 0.35rem;
       padding: 0.3rem 0.7rem;
-      font-size: 0.75rem;
+      font-size: 0.8125rem;
       font-weight: 600;
       color: var(--text-primary);
       background: #F5F7FA;
@@ -499,6 +499,59 @@
     [data-theme="dark"] .hero-visa {
       background: rgba(56, 189, 248, 0.08);
       border-color: rgba(56, 189, 248, 0.25);
+    }
+
+    /* Hero 移动端优化：兼容 web + mobile */
+    @media (max-width: 767px) {
+      .hero-text-block { padding-left: 0; }
+      .hero-location {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+        letter-spacing: 0.1em;
+      }
+      .hero-section-label {
+        font-size: 0.6875rem;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.4rem;
+      }
+      .hero-previously-pills {
+        gap: 0.4rem;
+        justify-content: center;
+      }
+      .hero-company-pill {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.8125rem;
+        min-height: 2.25rem;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .hero-tech-stack-wrap {
+        gap: 0.4rem 0.6rem;
+        justify-content: center;
+      }
+      .hero-tech-pill {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.8125rem;
+        min-height: 2rem;
+      }
+      .hero-tech-pill .hero-tech-pill-check {
+        width: 0.6875rem;
+        height: 0.6875rem;
+      }
+      .hero-visa {
+        padding: 0.4rem 0.85rem;
+        font-size: 0.8125rem;
+        line-height: 1.45;
+      }
+      .hero-visa .hero-visa-icon {
+        width: 0.6875rem;
+        height: 0.6875rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-location { padding: 0.28rem 0.6rem; font-size: 0.6875rem; }
+      .hero-company-pill { padding: 0.35rem 0.6rem; font-size: 0.75rem; min-height: 2rem; }
+      .hero-tech-pill { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
+      .hero-visa { padding: 0.35rem 0.75rem; font-size: 0.75rem; }
     }
 
     .skill-pill {
@@ -706,7 +759,6 @@
       heroSubline: "Specializing in scalable platforms and complex web applications.",
       // Hero 签证/工作权限（首屏突出展示）
       heroVisa: "Eligible to work in New Zealand (Open Work Visa)",
-      heroVisaShort: "Eligible to work in NZ — Open Work Visa (no sponsorship required)",
       // Hero 曾就职公司（name + url，点击跳转官网）
       heroPreviouslyAt: [
         { name: "Beike", url: "https://investors.ke.com" },
