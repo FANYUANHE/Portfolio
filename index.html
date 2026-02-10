@@ -625,6 +625,12 @@
       border-color: var(--accent);
       color: var(--accent);
     }
+    .theme-toggle .theme-icon-sun,
+    .theme-toggle .theme-icon-moon { position: absolute; inset: 0; margin: auto; width: 1.25rem; height: 1.25rem; }
+    .theme-toggle .theme-icon-moon { display: none; }
+    .theme-toggle .theme-icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .theme-icon-sun { display: block; }
+    [data-theme="dark"] .theme-toggle .theme-icon-moon { display: block; }
 
     .skills-section-title { color: var(--text-muted); }
 
@@ -988,10 +994,11 @@
         <button
           type="button"
           aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-          className="theme-toggle magnetic-btn"
+          className="theme-toggle magnetic-btn relative"
           onClick={toggle}
         >
-          <i data-lucide={theme === 'light' ? 'moon' : 'sun'} className="w-5 h-5" />
+          <i data-lucide="sun" className="theme-icon-sun" />
+          <i data-lucide="moon" className="theme-icon-moon" />
         </button>
       );
     };
@@ -1758,10 +1765,6 @@
         ScrollTrigger.refresh();
         return () => ScrollTrigger.getAll().forEach((t) => t.kill());
       }, []);
-
-      useEffect(() => {
-        lucide.createIcons();
-      }, [theme]);
 
       return (
         <>
