@@ -417,25 +417,26 @@
       font-size: 0.8125rem;
       font-weight: 600;
       color: var(--text-primary);
-      background: #F5F7FA;
+      background: transparent;
       border: 1px solid #E6EDF5;
       border-radius: 0.75rem;
       text-decoration: none;
-      transition: border-color 0.2s ease, color 0.2s ease;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
     }
     .hero-company-pill:hover {
-      border-color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
       color: var(--accent);
     }
     .hero-company-pill .hero-company-pill-icon {
-      opacity: 0;
+      opacity: 0.75;
       width: 0.75rem;
       height: 0.75rem;
       transition: opacity 0.2s ease;
     }
     .hero-company-pill:hover .hero-company-pill-icon { opacity: 1; }
     [data-theme="dark"] .hero-company-pill {
-      background: var(--bg-secondary);
+      background: transparent;
       border-color: var(--border);
     }
     .hero-subline-wrap { opacity: 0.95; }
@@ -455,7 +456,7 @@
       gap: 0.35rem;
       padding: 0.3rem 0.65rem;
       font-size: 0.8125rem;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-primary);
       background: var(--bg-primary);
       border: 1px solid var(--border);
