@@ -301,19 +301,44 @@
     .link-underline:hover { color: var(--accent); }
 
     .about-section-label { color: var(--text-muted); letter-spacing: 0.2em; }
-    .about-subtitle { color: var(--accent); font-weight: 600; padding-left: 0.75rem; border-left: 3px solid var(--accent); }
+    /* About 模块标题：与 Hero .hero-section-label 一致，高亮展示 */
+    .about-module-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .about-module-title i { color: var(--accent); opacity: 0.9; }
+    .about-subtitle {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-left: 0.75rem;
+      border-left: 3px solid var(--accent);
+    }
     .about-body { color: var(--text-primary); }
     .about-body-muted { color: var(--text-muted); }
     .about-intro-lead {
       color: var(--text-primary);
-      font-weight: 600;
-      letter-spacing: 0.01em;
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      font-weight: 500;
       padding-left: 0.75rem;
       border-left: 3px solid var(--accent);
+    }
+    @media (min-width: 768px) {
+      .about-intro-lead { font-size: 1.25rem; }
     }
     .about-emphasis-title { color: var(--text-primary); font-weight: 700; }
     .about-supplementary { color: var(--text-muted); }
     .about-supplementary .about-supplementary-icon { color: var(--text-muted); }
+    .about-list-text { font-size: 0.9375rem; line-height: 1.55; color: var(--text-primary); }
     .about-quote { color: var(--accent); font-weight: 600; }
 
     .about-company-link {
@@ -400,19 +425,19 @@
       font-weight: 700;
       letter-spacing: 0.02em;
     }
-    /* Hero 三组 section 标题统一：11–12px, 700, 0.12em, 中灰 */
+    /* Hero 三组 section 标题统一：11–12px, 700, 0.12em, 蓝色高亮 */
     .hero-section-label {
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--accent);
       margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    .hero-section-label i { opacity: 0.85; }
+    .hero-section-label i { color: var(--accent); opacity: 0.9; }
     .hero-previously-pills {
       display: flex;
       flex-wrap: wrap;
@@ -485,32 +510,27 @@
       color: var(--accent);
     }
     .hero-tech-pill:hover .hero-tech-pill-check { color: var(--accent); }
-    /* Work Rights：紧凑 info badge，主 CTA 感 */
+    /* Work Authorization：与 Technical Expertise 内容样式一致，不高亮、无图标 */
     .hero-visa {
       display: inline-flex;
-      align-items: baseline;
-      gap: 0.4rem;
-      padding: 0.35rem 0.75rem;
-      border-radius: 0.75rem;
-      background: rgba(14, 165, 233, 0.06);
-      color: var(--accent);
+      align-items: center;
+      padding: 0.3rem 0.65rem;
       font-size: 0.8125rem;
       font-weight: 600;
-      border: 1px solid rgba(14, 165, 233, 0.2);
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
       line-height: 1.4;
       max-width: 100%;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
     }
-    .hero-visa .hero-visa-icon {
-      flex-shrink: 0;
-      width: 0.75rem;
-      height: 0.75rem;
-      vertical-align: -0.2em;
+    .hero-visa:hover {
+      border-color: var(--border);
+      background: var(--bg-primary);
+      color: var(--text-primary);
     }
     .hero-visa span { word-break: break-word; }
-    [data-theme="dark"] .hero-visa {
-      background: rgba(56, 189, 248, 0.08);
-      border-color: rgba(56, 189, 248, 0.25);
-    }
 
     /* Hero 移动端优化：兼容 web + mobile */
     @media (max-width: 767px) {
@@ -533,6 +553,9 @@
       .about-selected-pills.hero-previously-pills {
         justify-content: flex-start;
       }
+      .about-tech-wrap.hero-tech-stack-wrap {
+        justify-content: flex-start;
+      }
       .hero-company-pill {
         padding: 0.4rem 0.75rem;
         font-size: 0.8125rem;
@@ -552,22 +575,14 @@
         width: 0.6875rem;
         height: 0.6875rem;
       }
-      .hero-visa {
-        padding: 0.4rem 0.85rem;
-        font-size: 0.8125rem;
-        line-height: 1.45;
-      }
-      .hero-visa .hero-visa-icon {
-        width: 0.6875rem;
-        height: 0.6875rem;
-      }
+      .hero-visa { padding: 0.35rem 0.7rem; font-size: 0.8125rem; }
     }
     @media (max-width: 480px) {
       .hero-location { padding: 0.28rem 0.6rem; font-size: 0.625rem; }
       .hero-name-wrap { font-size: 3.25rem; }
       .hero-company-pill { padding: 0.35rem 0.6rem; font-size: 0.75rem; min-height: 2rem; }
       .hero-tech-pill { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
-      .hero-visa { padding: 0.35rem 0.75rem; font-size: 0.75rem; }
+      .hero-visa { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
     }
 
     .skill-pill {
@@ -782,7 +797,7 @@
       // Hero 签证/工作权限（首屏突出展示）
       heroVisa: "Eligible to work in New Zealand (Open Work Visa)",
       // Hero 技术栈（单行展示）
-      heroTechStack: ["React", "TypeScript", "Node.js", "Platform Engineering"],
+      heroTechStack: ["React", "TypeScript", "Node.js"],
 
       // IMPORTANT: split years vs list to avoid React child error
       experienceYears: "10+ Years",
@@ -1200,7 +1215,7 @@
               {/* 主介绍区：intro + highlights + companies + ACS + 结语 */}
               <div className="bento-item large glass">
                 <h3 className="text-2xl md:text-3xl font-bold mb-4 about-emphasis-title">Hello, I'm {profileData.name}</h3>
-                <p className="text-base md:text-lg leading-relaxed about-intro-lead mb-6">
+                <p className="about-intro-lead mb-6">
                   {profileData.aboutIntro}
                 </p>
 
@@ -1210,12 +1225,12 @@
                       <span className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>
                         <i data-lucide={item.icon} className="w-4 h-4" />
                       </span>
-                      <p className="about-body text-sm md:text-base leading-relaxed flex-1 min-w-0 font-medium">{item.text}</p>
+                      <p className="about-list-text flex-1 min-w-0 font-medium">{item.text}</p>
                     </div>
                   ))}
                 </div>
 
-                <h4 className="about-subtitle text-sm uppercase tracking-wider mb-2">
+                <h4 className="about-subtitle mb-2">
                   Selected Experience
                 </h4>
                 <div className="hero-previously-pills about-selected-pills mb-6">
@@ -1235,14 +1250,14 @@
 
               {profileData.impactHighlights && profileData.impactHighlights.length > 0 ? (
               <div className="bento-item glass flex flex-col">
-                <h4 className="text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2 about-emphasis-title">
-                  <i data-lucide="zap" className="w-4 h-4" style={{ color: 'var(--accent)' }} />
+                <h4 className="about-module-title mb-3">
+                  <i data-lucide="zap" className="w-3.5 h-3.5" />
                   Impact Highlights
                 </h4>
-                <ul className="space-y-1.5 about-body text-sm leading-relaxed overflow-y-auto max-h-[12rem] pr-1">
+                <ul className="space-y-1.5 about-list-text overflow-y-auto max-h-[12rem] pr-1 list-none pl-0">
                   {profileData.impactHighlights.map((item, i) => (
                     <li key={i} className="flex gap-2 items-start">
-                      <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-1.5" style={{ background: 'var(--accent)' }} />
+                      <span className="flex-shrink-0 w-1 h-1 rounded-full mt-2 opacity-50" style={{ background: 'var(--text-muted)' }} aria-hidden />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -1259,14 +1274,14 @@
 
               {profileData.keyStrengths && profileData.keyStrengths.length > 0 && (
               <div className="bento-item glass flex flex-col text-left">
-                <h4 className="text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2 about-emphasis-title">
-                  <i data-lucide="sparkles" className="w-4 h-4" style={{ color: 'var(--accent)' }} />
+                <h4 className="about-module-title mb-3">
+                  <i data-lucide="sparkles" className="w-3.5 h-3.5" />
                   Key Strengths
                 </h4>
-                <ul className="space-y-1.5 about-body text-sm leading-relaxed overflow-y-auto max-h-[12rem] pr-1">
+                <ul className="space-y-1.5 about-list-text overflow-y-auto max-h-[12rem] pr-1 list-none pl-0">
                   {profileData.keyStrengths.map((item, i) => (
                     <li key={i} className="flex gap-2 items-start">
-                      <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-2" style={{ background: 'var(--accent)' }} />
+                      <span className="flex-shrink-0 w-1 h-1 rounded-full mt-2 opacity-50" style={{ background: 'var(--text-muted)' }} aria-hidden />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -1275,20 +1290,20 @@
               )}
 
               <div className="bento-item wide glass text-left about-supplementary">
-                <h4 className="text-base font-medium mb-2 flex items-center gap-2 about-supplementary">
-                  <i data-lucide="graduation-cap" className="w-4 h-4 about-supplementary-icon" style={{ color: 'var(--text-muted)' }} />
+                <h4 className="about-module-title mb-2 about-supplementary text-[0.75rem]">
+                  <i data-lucide="graduation-cap" className="w-3.5 h-3.5 about-supplementary-icon" />
                   Education
                 </h4>
-                <p className="text-sm about-body-muted">{profileData.education.school}</p>
-                <p className="text-xs about-body-muted opacity-90">{profileData.education.major} · {profileData.education.period}</p>
+                <p className="about-list-text about-body-muted">{profileData.education.school}</p>
+                <p className="text-[0.875rem] about-body-muted opacity-90 mt-0.5">{profileData.education.major} · {profileData.education.period}</p>
               </div>
 
               <div className="bento-item glass text-left about-supplementary">
-                <h4 className="text-base font-medium mb-2 flex items-center gap-2 about-supplementary">
-                  <i data-lucide="award" className="w-4 h-4 about-supplementary-icon" style={{ color: 'var(--text-muted)' }} />
+                <h4 className="about-module-title mb-2 about-supplementary text-[0.75rem]">
+                  <i data-lucide="award" className="w-3.5 h-3.5 about-supplementary-icon" />
                   Professional Recognition
                 </h4>
-                <p className="text-sm about-body-muted">Skills assessed for Software Engineering (ANZSCO 261313)</p>
+                <p className="about-list-text about-body-muted">Skills assessed for Software Engineering (ANZSCO 261313)</p>
               </div>
             </div>
           </div>
