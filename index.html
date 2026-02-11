@@ -311,6 +311,9 @@
       padding-left: 0.75rem;
       border-left: 3px solid var(--accent);
     }
+    .about-emphasis-title { color: var(--text-primary); font-weight: 700; }
+    .about-supplementary { color: var(--text-muted); }
+    .about-supplementary .about-supplementary-icon { color: var(--text-muted); }
     .about-quote { color: var(--accent); font-weight: 600; }
 
     .about-company-link {
@@ -526,6 +529,9 @@
       .hero-previously-pills {
         gap: 0.4rem;
         justify-content: center;
+      }
+      .about-selected-pills.hero-previously-pills {
+        justify-content: flex-start;
       }
       .hero-company-pill {
         padding: 0.4rem 0.75rem;
@@ -801,14 +807,17 @@
         { icon: "brain", text: "Known for translating complex requirements into high-performance, maintainable solutions that accelerate product delivery." },
         { icon: "building-2", text: "Based in Auckland with full work rights in New Zealand." }
       ],
-      acsAssessment: [
-        { code: "261212", title: "Web Developer" },
-        { code: "261312", title: "Developer Programmer" },
-        { code: "261313", title: "Software Engineer" }
+      // Key Strengths（About Me 中 Selected Experience 上方）
+      keyStrengths: [
+        "Platform architecture and scalable frontend systems",
+        "Full-stack capability with strong React and Node.js experience",
+        "Design systems, component libraries, and engineering productivity"
       ],
-      aboutRelocating: "Currently moving to New Zealand for postgraduate study and job-seeking.",
-      aboutClosing: "I love clean code, smart UI interactions, and turning designs into delightful user experiences.",
-
+      impactHighlights: [
+        "Architected a low-code platform that reduced campaign launch time from days to minutes",
+        "Led development of shared component libraries adopted across multiple business units",
+        "Improved engineering efficiency through scalable platform design"
+      ],
       // Work Experience (companyLogo optional: logo URL; companyBrief optional)
       experienceList: [
         {
@@ -1190,7 +1199,7 @@
             <div className="bento-grid">
               {/* 主介绍区：intro + highlights + companies + ACS + 结语 */}
               <div className="bento-item large glass">
-                <h3 className="text-2xl md:text-3xl font-semibold mb-4 about-body">Hello, I'm {profileData.name}</h3>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 about-emphasis-title">Hello, I'm {profileData.name}</h3>
                 <p className="text-base md:text-lg leading-relaxed about-intro-lead mb-6">
                   {profileData.aboutIntro}
                 </p>
@@ -1201,7 +1210,7 @@
                       <span className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>
                         <i data-lucide={item.icon} className="w-4 h-4" />
                       </span>
-                      <p className="about-body text-sm md:text-base leading-relaxed flex-1 min-w-0">{item.text}</p>
+                      <p className="about-body text-sm md:text-base leading-relaxed flex-1 min-w-0 font-medium">{item.text}</p>
                     </div>
                   ))}
                 </div>
@@ -1209,64 +1218,77 @@
                 <h4 className="about-subtitle text-sm uppercase tracking-wider mb-2">
                   Selected Experience
                 </h4>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {profileData.experienceList.map((exp, i) => (
-                    exp.companyUrl ? (
-                      <a key={i} href={exp.companyUrl} target="_blank" rel="noopener noreferrer" className="about-company-link inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all" style={{ background: 'var(--accent-soft)', borderColor: 'var(--accent)', color: 'var(--accent)' }}>
-                        <span>{exp.company}</span>
-                        <i data-lucide="external-link" className="w-3 h-3 opacity-80 flex-shrink-0" />
-                      </a>
-                    ) : (
-                      <span key={i} className="px-3 py-1.5 rounded-lg text-xs font-medium border about-acs-tag" style={{ background: 'var(--accent-soft)', borderColor: 'var(--accent)', color: 'var(--accent)' }}>
-                        {exp.company}
-                      </span>
-                    )
-                  ))}
+                <div className="hero-previously-pills about-selected-pills mb-6">
+                    {profileData.experienceList.map((exp, i) => (
+                      exp.companyUrl ? (
+                        <a key={i} href={exp.companyUrl} target="_blank" rel="noopener noreferrer" className="hero-company-pill" title={`Visit ${exp.company}`}>
+                          {exp.company}
+                          <i data-lucide="external-link" className="hero-company-pill-icon" aria-hidden />
+                        </a>
+                      ) : (
+                        <span key={i} className="hero-company-pill">{exp.company}</span>
+                      )
+                    ))}
                 </div>
 
-                <h4 className="about-subtitle text-sm uppercase tracking-wider mb-2">
-                  ACS Skills Assessment
-                </h4>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {profileData.acsAssessment.map((a, i) => (
-                    <span key={i} className="px-3 py-1.5 rounded-lg text-xs font-medium border about-acs-tag" style={{ background: 'var(--accent-soft)', borderColor: 'var(--accent)', color: 'var(--accent)' }}>
-                      {a.code} – {a.title}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="text-sm about-body-muted mb-4">{profileData.aboutRelocating}</p>
-                <p className="text-base font-semibold about-quote">
-                  {profileData.aboutClosing}
-                </p>
               </div>
 
+              {profileData.impactHighlights && profileData.impactHighlights.length > 0 ? (
+              <div className="bento-item glass flex flex-col">
+                <h4 className="text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2 about-emphasis-title">
+                  <i data-lucide="zap" className="w-4 h-4" style={{ color: 'var(--accent)' }} />
+                  Impact Highlights
+                </h4>
+                <ul className="space-y-1.5 about-body text-sm leading-relaxed overflow-y-auto max-h-[12rem] pr-1">
+                  {profileData.impactHighlights.map((item, i) => (
+                    <li key={i} className="flex gap-2 items-start">
+                      <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-1.5" style={{ background: 'var(--accent)' }} />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              ) : (
               <div className="bento-item glass flex flex-col justify-center items-center text-center">
                 <span className="text-5xl md:text-6xl font-black" style={{ color: 'var(--accent)' }}>
                   {profileData.experienceYears}
                 </span>
                 <span className="text-sm mt-2 about-body-muted">Experience</span>
               </div>
+              )}
 
-              <div className="bento-item glass flex flex-col justify-center items-center text-center">
-                <i data-lucide="map-pin" className="w-8 h-8 mb-3 about-body-muted" style={{ color: 'var(--text-muted)' }} />
-                <span className="text-lg font-medium about-body">{profileData.location}</span>
-                <span className="text-sm mt-1 about-body-muted">Based in</span>
+              {profileData.keyStrengths && profileData.keyStrengths.length > 0 && (
+              <div className="bento-item glass flex flex-col text-left">
+                <h4 className="text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2 about-emphasis-title">
+                  <i data-lucide="sparkles" className="w-4 h-4" style={{ color: 'var(--accent)' }} />
+                  Key Strengths
+                </h4>
+                <ul className="space-y-1.5 about-body text-sm leading-relaxed overflow-y-auto max-h-[12rem] pr-1">
+                  {profileData.keyStrengths.map((item, i) => (
+                    <li key={i} className="flex gap-2 items-start">
+                      <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-2" style={{ background: 'var(--accent)' }} />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
+              )}
 
-              <div className="bento-item wide glass">
-                <h4 className="text-lg font-semibold mb-3 flex items-center gap-2 about-body">
-                  <i data-lucide="graduation-cap" className="w-5 h-5" style={{ color: 'var(--accent)' }} />
+              <div className="bento-item wide glass text-left about-supplementary">
+                <h4 className="text-base font-medium mb-2 flex items-center gap-2 about-supplementary">
+                  <i data-lucide="graduation-cap" className="w-4 h-4 about-supplementary-icon" style={{ color: 'var(--text-muted)' }} />
                   Education
                 </h4>
-                <p className="text-base about-body">{profileData.education.school}</p>
-                <p className="text-sm about-body-muted">{profileData.education.major} · {profileData.education.period}</p>
+                <p className="text-sm about-body-muted">{profileData.education.school}</p>
+                <p className="text-xs about-body-muted opacity-90">{profileData.education.major} · {profileData.education.period}</p>
               </div>
 
-              <div className="bento-item glass flex flex-col justify-center items-center text-center">
-                <i data-lucide="building-2" className="w-8 h-8 mb-3 about-body-muted" style={{ color: 'var(--text-muted)' }} />
-                <span className="text-3xl font-bold about-body" style={{ color: 'var(--accent)' }}>{profileData.experienceList.length}</span>
-                <span className="text-sm mt-1 about-body-muted">Companies</span>
+              <div className="bento-item glass text-left about-supplementary">
+                <h4 className="text-base font-medium mb-2 flex items-center gap-2 about-supplementary">
+                  <i data-lucide="award" className="w-4 h-4 about-supplementary-icon" style={{ color: 'var(--text-muted)' }} />
+                  Professional Recognition
+                </h4>
+                <p className="text-sm about-body-muted">Skills assessed for Software Engineering (ANZSCO 261313)</p>
               </div>
             </div>
           </div>
