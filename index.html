@@ -337,18 +337,22 @@
         gap: 1.25rem;
         min-height: 100%;
       }
-      /* 三张卡片均分高度填满右侧列，与左侧同高无留白 */
+      /* Education / Professional Recognition：按内容自然高度 */
       #about .about-right-col-inner .about-right-card {
-        flex: 1;
-        min-height: 0;
+        flex: 0 0 auto;
         display: flex;
         flex-direction: column;
       }
-      /* Impact Highlights 列表过多时在卡片内滚动 */
-      #about .about-right-col-inner .about-right-card ul {
+      /* Impact Highlights：撑满剩余空间，内容完整展示无滚动 */
+      #about .about-right-col-inner .about-right-card:first-child {
         flex: 1;
         min-height: 0;
-        overflow-y: auto;
+      }
+      /* Impact Highlights 内部列表填满卡片高度 */
+      #about .about-right-col-inner .about-right-card:first-child ul {
+        flex: 1;
+        min-height: 0;
+        overflow-y: visible;
       }
       #about .about-right-col-inner .about-right-col-spacer {
         display: none;
