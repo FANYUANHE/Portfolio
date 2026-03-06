@@ -374,6 +374,26 @@
       #about .about-right-col .about-right-col-spacer { display: none; }
     }
 
+    /* 各模块底部向下箭头：统一位置，移动端略紧凑、PC 端留白适中 */
+    .section-scroll-arrow {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 1.25rem;
+    }
+    @media (min-width: 768px) {
+      .section-scroll-arrow { bottom: 2.5rem; }
+    }
+    /* Hero 首屏箭头：移动端距底稍近、PC 与其他模块一致 */
+    #hero .section-scroll-arrow {
+      bottom: 1rem;
+    }
+    @media (min-width: 768px) {
+      #hero .section-scroll-arrow {
+        bottom: 2.5rem;
+      }
+    }
+
     ::-webkit-scrollbar { width: 0; background: transparent; }
 
     .link-underline { position: relative; }
@@ -1179,7 +1199,7 @@
       const hasHeroImage = profileData.heroImage && profileData.heroImage.trim() !== "";
 
       return (
-        <section ref={heroRef} className="min-h-screen flex flex-col justify-center items-center relative px-6 pt-24 pb-20 md:pt-28 md:pb-24">
+        <section id="hero" ref={heroRef} className="min-h-screen flex flex-col justify-center items-center relative px-6 pt-24 pb-12 md:pt-28 md:pb-20">
           <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-12 md:gap-16 lg:gap-20">
             <div ref={textBlockRef} className="flex-1 text-center md:text-left order-2 md:order-1 hero-text-block">
               <p ref={taglineRef} className="hero-location mb-5 md:mb-6 inline-flex">
@@ -1264,8 +1284,8 @@
             </div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <a href="#about" className="block text-current" aria-label="Scroll to About">
+          <div className="section-scroll-arrow">
+            <a href="#about" className="block text-current animate-bounce" aria-label="Scroll to About">
               <i data-lucide="chevron-down" className="w-6 h-6 opacity-60" />
             </a>
           </div>
@@ -1298,7 +1318,7 @@
       }, []);
 
       return (
-        <section id="about" ref={sectionRef} className="relative py-16 md:py-24 px-6">
+        <section id="about" ref={sectionRef} className="relative py-20 md:py-28 px-6">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-sm tracking-[0.3em] uppercase mb-8 about-section-label">About Me</h2>
 
@@ -1399,8 +1419,8 @@
             </div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <a href="#experience" className="block text-current" aria-label="Scroll to Experience">
+          <div className="section-scroll-arrow">
+            <a href="#experience" className="block text-current animate-bounce" aria-label="Scroll to Experience">
               <i data-lucide="chevron-down" className="w-6 h-6 opacity-60" />
             </a>
           </div>
@@ -1444,7 +1464,7 @@
       }, []);
 
       return (
-        <section id="experience" ref={sectionRef} className="relative py-24 md:py-32 px-6">
+        <section id="experience" ref={sectionRef} className="relative py-20 md:py-28 px-6">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-sm tracking-[0.3em] uppercase opacity-60 mb-16">Experience</h2>
 
@@ -1515,8 +1535,8 @@
 
           </div>
 
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <a href="#projects" className="block text-current" aria-label="Scroll to Projects">
+          <div className="section-scroll-arrow">
+            <a href="#projects" className="block text-current animate-bounce" aria-label="Scroll to Projects">
               <i data-lucide="chevron-down" className="w-6 h-6 opacity-60" />
             </a>
           </div>
@@ -1594,7 +1614,7 @@
       };
 
       return (
-        <section id="projects" ref={sectionRef} className="relative py-24 md:py-32 px-6">
+        <section id="projects" ref={sectionRef} className="relative py-20 md:py-28 px-6">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-sm tracking-[0.3em] uppercase opacity-60 mb-16">Projects</h2>
 
@@ -1725,8 +1745,8 @@
             </div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <a href="#skills" className="block text-current" aria-label="Scroll to Skills">
+          <div className="section-scroll-arrow">
+            <a href="#skills" className="block text-current animate-bounce" aria-label="Scroll to Skills">
               <i data-lucide="chevron-down" className="w-6 h-6 opacity-60" />
             </a>
           </div>
@@ -1771,7 +1791,7 @@
       const getSkillColor = (name) => profileData.skillColors?.[name] || profileData.colors.accent;
 
       return (
-        <section id="skills" ref={sectionRef} className="py-24 md:py-32 px-6 relative overflow-hidden">
+        <section id="skills" ref={sectionRef} className="py-20 md:py-28 px-6 relative overflow-hidden">
           <div className="absolute inset-0 pointer-events-none opacity-30" style={{
             background: 'radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-soft) 0%, transparent 60%)'
           }} />
@@ -1823,8 +1843,8 @@
             </div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <a href="#contact" className="block text-current" aria-label="Scroll to Contact">
+          <div className="section-scroll-arrow">
+            <a href="#contact" className="block text-current animate-bounce" aria-label="Scroll to Contact">
               <i data-lucide="chevron-down" className="w-6 h-6 opacity-60" />
             </a>
           </div>
@@ -1855,7 +1875,7 @@
       }, []);
 
       return (
-        <footer id="contact" ref={sectionRef} className="min-h-[70vh] flex flex-col justify-center py-16 sm:py-20 md:py-28 lg:py-32 px-4 sm:px-6 relative">
+        <footer id="contact" ref={sectionRef} className="min-h-[70vh] flex flex-col justify-center py-20 md:py-28 px-4 sm:px-6 relative">
           <div className="footer-content max-w-6xl mx-auto text-center w-full">
             <p className="footer-label uppercase mb-4 md:mb-6">Let's Connect</p>
 
