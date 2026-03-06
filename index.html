@@ -926,6 +926,42 @@
       color: var(--text-primary);
     }
 
+    /* 工作经历描述多点列表：与 Impact Highlights 一致的灰色小圆点 */
+    .experience-description-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem 0;
+    }
+    .experience-description-list li {
+      position: relative;
+      padding-left: 1rem;
+      margin-bottom: 0.625rem;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+      opacity: 0.9;
+    }
+    .experience-description-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.45rem;
+      width: 0.25rem;
+      height: 0.25rem;
+      border-radius: 50%;
+      background: var(--text-muted);
+      opacity: 0.5;
+    }
+    .experience-description-list li:last-child {
+      margin-bottom: 0;
+    }
+    @media (min-width: 768px) {
+      .experience-description-list li {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+      }
+    }
+
     @media (max-width: 768px) {
       .bento-grid { grid-template-columns: 1fr; }
       .bento-item.large, .bento-item.wide { grid-column: span 1; grid-row: span 1; }
@@ -997,48 +1033,46 @@
       // Work Experience (companyLogo optional: logo URL; companyBrief optional)
       experienceList: [
         {
-          company: "Beike",
-          companyLogo: "images/company_logo/beike.png",
-          companyBrief: "Technology-driven real estate platform integrating online and offline brokerage services.",
-          companyUrl: "https://investors.ke.com",
-          position: "Frontend Tech Lead",
-          period: "Feb 2018 - Mar 2020",
-          description:
-            "Built a low-code marketing campaign platform enabling visual page creation. Reduced campaign launch time from 4-5 days to under 30 minutes, decoupling operations from development.",
-          highlights: ["Low-code Platform", "Visualization", "Efficiency"]
-        },
-        {
-          company: "Alibaba",
-          companyLogo: "images/company_logo/alibaba.png",
-          companyBrief: "Global leader in e-commerce, cloud computing, and digital infrastructure.",
-          companyUrl: "https://www.alibabagroup.com/en-US/",
-          position: "Frontend Engineer",
-          period: "Aug 2016 - Feb 2018",
-          description:
-            "Developed and maintained mobile and web applications for the healthcare platform, focusing on user experience and performance optimization.",
-          highlights: ["Mobile Dev", "Healthcare", "UX"]
+          company: "Meituan",
+          companyLogo: "images/company_logo/meituan.png",
+          companyBrief: "Leading local life services and delivery platform in China.",
+          companyUrl: "https://www.meituan.com/en-US/about-us",
+          position: "Senior Software Engineer",
+          period: "Jul 2021 - Apr 2022",
+          description: [
+            "Core developer for Meituan Youxuan, a large-scale community group-buying platform integrated with the Meituan App and WeChat ecosystem.",
+            "Built and optimized the leader-side frontend infrastructure, introducing hot–cold code separation and standardized engineering practices to reduce infrastructure change frequency and improve system stability.",
+            "Led the Group-Point ID encryption and obfuscation redesign, preventing horizontal privilege escalation caused by ID scraping and strengthening sensitive data protection."
+          ],
+          highlights: ["Frontend Infrastructure", "Hot-Cold Separation", "ID Encryption", "Data Protection"]
         },
         {
           company: "Baidu",
           companyLogo: "images/company_logo/baidu.png",
-          companyBrief: "Leading AI and internet services company, well known for search, cloud, and deep learning technologies.",
+          companyBrief: "Leading search engine and AI company in China.",
           companyUrl: "https://ir.baidu.com/",
-          position: "Frontend Tech Lead",
-          period: "Jul 2020 - Jul 2021",
-          description:
-            "Led the intelligent customer service project serving Fengchao/feed advertising platforms. Developed H5 customer service, onboarded 10+ platforms, and increased daily issue resolution from 200-300 to 1000.",
-          highlights: ["Team Lead", "H5 Development", "Platform Integration"]
+          position: "Senior R&D Engineer",
+          period: "Aug 2020 - Jul 2021",
+          description: [
+            "Led the development of an intelligent customer service platform, filling the gap of in-app support functionality for Baidu's marketing applications.",
+            "Drove cross-team adoption of the platform across 15+ internal business systems, leveraging user inquiries as feedback to continuously improve product and platform capabilities.",
+            "Improved operational efficiency by reducing manual customer support workload and increasing resolved cases from 200–300 to around 1,000 per day."
+          ],
+          highlights: ["Customer Service Platform", "Cross-team Adoption", "Operational Efficiency"]
         },
         {
-          company: "Meituan",
-          companyLogo: "images/company_logo/meituan.png",
-          companyBrief: "Major platform for food delivery, local services, and on-demand consumer technology.",
-          companyUrl: "https://www.meituan.com/en-US/about-us",
-          position: "Senior Frontend Engineer",
-          period: "Jul 2021 - Present",
-          description:
-            "Core developer for Meituan Youxuan leader mini program. Led component library development, UI standardization, and security enhancements including ID obfuscation to prevent horizontal privilege escalation.",
-          highlights: ["Component Library", "Security", "Performance"]
+          company: "Beike",
+          companyLogo: "images/company_logo/beike.png",
+          companyBrief: "Leading property and living services platform in China.",
+          companyUrl: "https://investors.ke.com",
+          position: "Senior Web Front-end Engineer",
+          period: "Feb 2018 - Mar 2020",
+          description: [
+            "Built a low-code operations platform that enables non-technical teams to assemble UI components and rapidly generate mobile marketing campaign pages.",
+            "Decoupled campaign release workflows from engineering development cycles, allowing operations teams to configure and launch campaigns independently.",
+            "Significantly improved development efficiency by reducing campaign launch time from 4–5 person-days to under 30 minutes, freeing up substantial engineering resources."
+          ],
+          highlights: ["Low-code Platform", "Decoupled Workflows", "Development Efficiency"]
         },
       ],
 
@@ -1089,27 +1123,6 @@
             "Onboarded 10+ business platforms; daily issue resolution increased from 200–300 to 1000+",
             "Offline and retry strategies for first screen and critical APIs significantly improved success rate on weak networks",
             "Unified Q&A-to-ticket flow and UI, with a clear improvement in user satisfaction"
-          ]
-        },
-        {
-          title: "Meituan Preferred Leader Mini Program",
-          type: "mobile",
-          screenshots: [
-            "https://picsum.photos/400/700?random=3",
-            "https://picsum.photos/400/700?random=3b",
-            "https://picsum.photos/400/700?random=3c"
-          ],
-          background: "The leader app powers orders, commissions, products, and fulfillment. We had to iterate quickly while keeping it stable and secure, with consistent experience across mini program and H5.",
-          role: "Core frontend developer: component library, UI standards adoption, and security (e.g. ID obfuscation) design and implementation.",
-          problemsSolved: [
-            "Duplicate work across business lines, inconsistent components and styles",
-            "Sensitive data (e.g. user IDs) at risk of leakage and privilege escalation",
-            "Bundle size and first-screen performance degrading as features grew"
-          ],
-          results: [
-            "Unified component library and design system; consistent UI and interaction across clients; ~30% dev efficiency gain",
-            "ID obfuscation and permission checks in place, reducing horizontal privilege escalation and data leakage",
-            "Subpackaging and lazy loading; main bundle and first-screen metrics under control and monitored"
           ]
         }
       ],
@@ -1518,7 +1531,7 @@
       return (
         <section id="experience" ref={sectionRef} className="relative py-20 md:py-28 px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-sm tracking-[0.3em] uppercase opacity-60 mb-16">Experience</h2>
+            <h2 className="text-sm tracking-[0.3em] uppercase opacity-60 mb-16">Selected Experience</h2>
 
             <div className="timeline-container relative">
               <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px experience-line" style={{ background: 'linear-gradient(to bottom, var(--accent), var(--border), transparent)' }} />
@@ -1570,9 +1583,17 @@
                     <p className="text-base font-medium mb-2 md:mb-4" style={{ color: 'var(--accent)' }}>
                       {exp.position}
                     </p>
-                    <p className="text-sm md:text-base opacity-70 leading-relaxed mb-2 md:mb-4">
-                      {exp.description}
-                    </p>
+                    {Array.isArray(exp.description) ? (
+                      <ul className="experience-description-list">
+                        {exp.description.map((point, i) => (
+                          <li key={i}>{point}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-sm md:text-base opacity-70 leading-relaxed mb-2 md:mb-4">
+                        {exp.description}
+                      </p>
+                    )}
                     <div className="flex flex-wrap gap-2">
                       {exp.highlights.map((highlight, i) => (
                         <span key={i} className="px-3 py-1 rounded-full text-xs experience-highlight-tag">
