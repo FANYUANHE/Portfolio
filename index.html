@@ -747,36 +747,45 @@
 
     .skill-pill {
       position: relative;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      color: var(--text-primary);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
     .skill-pill:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.15);
+      transform: translateY(-1px);
     }
     .skill-pill::before {
       content: '';
       position: absolute;
-      left: 0;
+      left: 0.375rem;
       top: 50%;
       transform: translateY(-50%);
-      width: 3px;
-      height: 60%;
-      border-radius: 2px;
+      width: 2px;
+      height: 50%;
+      border-radius: 1px;
       background: var(--skill-color, var(--accent));
-      opacity: 0.7;
-      transition: opacity 0.25s ease, height 0.25s ease;
+      opacity: 0.65;
+      transition: opacity 0.2s ease, height 0.2s ease;
     }
     .skill-pill:hover::before {
-      height: 80%;
-      opacity: 1;
+      height: 65%;
+      opacity: 0.9;
+    }
+    @media (min-width: 768px) {
+      .skill-pill::before { left: 0.5rem; }
     }
     .skills-group-card {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 1.75rem 1.5rem;
+      border-radius: 1rem;
+      padding: 1.25rem 1.125rem;
       box-shadow: 0 4px 24px -4px var(--accent-soft);
       transition: box-shadow 0.3s ease, border-color 0.3s ease, background 0.25s ease;
+    }
+    @media (min-width: 768px) {
+      .skills-group-card {
+        border-radius: 1.25rem;
+        padding: 1.5rem 1.5rem;
+      }
     }
     .skills-group-card:hover {
       box-shadow: 0 12px 40px -8px var(--accent-soft);
@@ -1874,46 +1883,48 @@
       const getSkillColor = (name) => profileData.skillColors?.[name] || profileData.colors.accent;
 
       return (
-        <section id="skills" ref={sectionRef} className="py-20 md:py-28 px-6 relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none opacity-30" style={{
-            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-soft) 0%, transparent 60%)'
+        <section id="skills" ref={sectionRef} className="py-16 md:py-28 px-4 sm:px-6 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none opacity-25" style={{
+            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-soft) 0%, transparent 65%)'
           }} />
           <div className="max-w-6xl mx-auto relative">
-            <h2 className="skills-title text-sm tracking-[0.3em] uppercase mb-14 skills-section-title">
+            <h2 className="skills-title text-sm tracking-[0.3em] uppercase mb-10 md:mb-14 skills-section-title">
               Technical Skills
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-10 md:gap-12">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
               {profileData.skillsGroups.map((group, gIndex) => (
                 <div key={gIndex} className="skills-group skills-group-card">
-                  <h3 className="text-base font-semibold tracking-wide mb-6 flex items-center gap-2">
-                    <span className="w-1.5 h-6 rounded-full" style={{ background: 'var(--accent)' }} />
-                    <span style={{ color: 'var(--accent)' }}>{group.title}</span>
+                  <h3 className="text-sm sm:text-base font-semibold tracking-wide mb-4 md:mb-5 flex items-center gap-2.5 md:gap-3">
+                    <span className="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex-shrink-0" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>
+                      <i data-lucide={gIndex === 0 ? 'code-2' : 'wrench'} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    </span>
+                    <span style={{ color: 'var(--text-primary)' }}>{group.title}</span>
                   </h3>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2 md:gap-2.5">
                     {group.items.map((item, i) => {
                       const color = getSkillColor(item);
                       const lightBg = ['#F7DF1E', '#61DAFB', '#FFCC00', '#8DD6F9', '#4FC08D'].includes(color);
-                      const pillTextColor = theme === 'dark' ? 'var(--text-primary)' : (lightBg ? '#1a1a2e' : 'var(--text-primary)');
+                      const pillTextColor = theme === 'dark' ? 'var(--text-primary)' : (lightBg ? 'rgba(26,26,46,0.92)' : 'var(--text-primary)');
                       return (
                         <span
                           key={i}
-                          className="skill-pill inline-flex items-center pl-5 pr-4 py-2.5 rounded-xl text-sm font-semibold border transition-all duration-250"
+                          className="skill-pill inline-flex items-center pl-3.5 pr-2.5 sm:pl-4 sm:pr-3 py-2 rounded-lg text-xs sm:text-sm font-medium border transition-all duration-250"
                           style={{
                             '--skill-color': color,
-                            background: `linear-gradient(90deg, ${color}18 0%, ${color}08 100%)`,
+                            background: `linear-gradient(135deg, ${color}14 0%, ${color}06 100%)`,
                             color: pillTextColor,
-                            borderColor: `${color}25`
+                            borderColor: `${color}22`
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.boxShadow = `0 8px 28px -6px ${color}50`;
-                            e.currentTarget.style.borderColor = `${color}60`;
-                            e.currentTarget.style.background = `linear-gradient(90deg, ${color}22 0%, ${color}12 100%)`;
+                            e.currentTarget.style.boxShadow = `0 4px 14px -4px ${color}38`;
+                            e.currentTarget.style.borderColor = `${color}45`;
+                            e.currentTarget.style.background = `linear-gradient(135deg, ${color}20 0%, ${color}10 100%)`;
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.boxShadow = '';
-                            e.currentTarget.style.borderColor = `${color}30`;
-                            e.currentTarget.style.background = `linear-gradient(90deg, ${color}18 0%, ${color}08 100%)`;
+                            e.currentTarget.style.borderColor = `${color}22`;
+                            e.currentTarget.style.background = `linear-gradient(135deg, ${color}14 0%, ${color}06 100%)`;
                           }}
                         >
                           <span className="relative z-10">{item}</span>
