@@ -118,11 +118,11 @@ const profileDataEn = {
         "Led the architecture of the visual editor, rendering engine, and reusable component system.",
         "Built the foundation for a scalable and reusable operations platform."
       ],
-      background: [
-        "The business needed to launch promotional and thematic campaign pages at high frequency.",
-        "The traditional delivery model was slow and heavily dependent on engineering resources and release cycles.",
-        "Repetitive campaign development was consuming significant frontend capacity."
-      ],
+      // background: [
+      //   "The business needed to launch promotional and thematic campaign pages at high frequency.",
+      //   "The traditional delivery model was slow and heavily dependent on engineering resources and release cycles.",
+      //   "Repetitive campaign development was consuming significant frontend capacity."
+      // ],
       challengesSolved: [
         "Shortened campaign delivery time and improved response speed to business needs.",
         "Decoupled operations from engineering in the campaign release workflow.",
@@ -159,11 +159,11 @@ const profileDataEn = {
         "Drove code quality, engineering standards, and implementation of critical business flows.",
         "Contributed deeply to high-complexity modules such as payments and transactions."
       ],
-      background: [
-        "The company needed a mobile sales channel to support online course purchases and conversion on mobile devices.",
-        "Existing systems and data management capabilities were insufficient, resulting in fragmented workflows and high maintenance costs.",
-        "As the business scaled, the platform required a more stable and extensible technical foundation."
-      ],
+      // background: [
+      //   "The company needed a mobile sales channel to support online course purchases and conversion on mobile devices.",
+      //   "Existing systems and data management capabilities were insufficient, resulting in fragmented workflows and high maintenance costs.",
+      //   "As the business scaled, the platform required a more stable and extensible technical foundation."
+      // ],
       challengesSolved: [
         "Solved multi-environment compatibility issues across mobile course pages, including WeChat, Alipay, and major browsers.",
         "Handled complex payment and transaction logic involving different course types, payment methods, and discount combinations.",
