@@ -300,7 +300,7 @@ social: {
 
 ### 手动部署
 
-将 `dist/` 目录内容上传至任意静态托管服务（Vercel、Netlify、Cloudflare Pages 等）。
+将 `dist/` 目录内容上传至任意静态托管服务（Vercel、Netlify、Cloudflare Pages 等）
 
 > **注意：** 如果部署到非根路径，需要相应修改 `vite.config.js` 中的 `base` 配置。
 
